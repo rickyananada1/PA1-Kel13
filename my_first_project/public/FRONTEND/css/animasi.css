@@ -1,0 +1,75 @@
+/* utama */
+.animasi {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+.animasi_InDown {
+    animation-name: bounceInDown;
+}
+
+.animasi_InUp {
+    animation-name: bounceInUp;
+}
+
+@keyframes bounceInDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes bounceInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+/* Service Card */
+.profile-card-2 {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 4.5s ease, transform 4.5s ease;
+}
+
+.animate__fadeInUp {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Tombol Navbar Toggler */
+.navbar-toggler {
+    border: none;
+    padding: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-toggler:focus {
+    outline: none;
+  }
+  
+  .navbar-toggler-icon {
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+    content: "";
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+    transform: rotate(90deg);
+  }
+  
