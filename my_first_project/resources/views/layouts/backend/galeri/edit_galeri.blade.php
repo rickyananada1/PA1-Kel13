@@ -64,12 +64,7 @@
 
 
         <div class="content-wrapper">
-
-
-       
-
-            <h1>Selamat Datang Kembali {{Auth::user()->name}}</h1>
-            <br><br>
+          <div class="container"><br><br>
             @if(session('success'))
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
               <strong>{{session('success')}}</strong>
@@ -78,96 +73,31 @@
               </button>
             </div>
             @endif
-            <div class="card-header"><h3>Data Penduduk</h3></div>
-            <table border="3">
-                <tr>
-                <th>No</th>
-                <th>Category Name</th>
-                <th>User ID</th>
-                <th>Created At</th>
-                <th>Edit</th>
-                </tr>
-                @php($i = 1)
-                @foreach($categories as $category)
-                <tr> 
-                <td>{{$categories->firstItem()+$loop->index}}</td>
-                  <td>{{$category->category_name}}</td>
-                  <td>{{$category->user_id}}</td>
-                  <td>
-                  @if($category->created_at==NULL)
-                    <span class="text-danger">Tidak Ada Tanggal</span>
-                  @else
-                  {{Carbon\Carbon::parse($category->created_at)->diffForHumans()}}
-                  @endif
-                </td>
-                <td>
-                  <a href="{{url('category/edit/'.$category->id )}}" class="btn btn-info">Edit</a>
-                  <a href="{{url('softdelete/category/'.$category->id )}}" class="btn btn-danger">Delete</a>
-                </td>
-                </tr>
-                @endforeach
-            </table>
-        
-            {{$categories->links()  }}  
-       
-              
-              <div class="card">
-                
-                <div class="card-header">Add Category
+            <form action="{{url('/Galeri/update/gambar/'.$galeri->id)}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="old_image" value="{{$galeri->brand_image}}">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Judul Gambar</label>
+                  <input type="text" name="judul_galeri" class="form-control"  placeholder="Masukkan Nama" value="{{$galeri->judul_galeri}}">
+                  @error('judul_galeri')  
+                  <span class="text-danger">{{$message}}</span>
+                  @enderror
                 </div>
-                <div class="card-body">
-                  <form action="{{route('store.category')}}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                      <label for="example">Category Name</label>
-                      <input type="text" name="category_name" class="form-control">
-                    </div>
-                    @error('category_name')   
-                    <span class="text-danger">{{$message}}</span>
-                    @enderror
-                    <button type="submit" class="btn btn-primary">Add Category</button>
-                  </form>
-                  
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Edit Gambar</label>
+                  <input type="file" name="brand_image" class="form-control" placeholder="Masukkan Alamat" value="{{$galeri->brand_image}}">
+                  @error('brand_image')  
+                  <span class="text-danger">{{$message}}</span>
+                  @enderror
                 </div>
-                <div class="card-header">Trashlist Category</div>
-                <table border="3">
-                  <tr>
-                  <th>No</th>
-                  <th>Category Name</th>
-                  <th>User ID</th>
-                  <th>Created At</th>
-                  <th>Edit</th>
-                  </tr>
-                  @php($i = 1)
-                  @foreach($trashCat as $category)
-                  <tr> 
-                  <td>{{$trashCat->firstItem()+$loop->index}}</td>
-                    <td>{{$category->category_name}}</td>
-                    <td>{{$category->user_id}}</td>
-                    <td>
-                    @if($category->created_at==NULL)
-                      <span class="text-danger">Tidak Ada Tanggal</span>
-                    @else
-                    {{Carbon\Carbon::parse($category->created_at)->diffForHumans()}}
-                    @endif
-                  </td>
-                  <td>
-                    <a href="{{url('category/restore/'.$category->id )}}" class="btn btn-info">Restore</a>
-                    <a href="{{url('category/delete/'.$category->id )}}" class="btn btn-danger">Delete Perm</a>
-                  </td>
-                  </tr>
-                  @endforeach
-              </table>
-          
-              {{$trashCat->links()  }}  
-             
-                
+                <div class="form-group">
+                    <img src="{{asset($galeri->brand_image)}}" style="height:200px; width:300px;" alt="">
                 </div>
-               
-           
-
-
-     
+               <br><br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        </div>
+        </div>
 
               @include('layouts.backend.footer')
 
@@ -201,3 +131,4 @@
 
   </body>
 </html>
+

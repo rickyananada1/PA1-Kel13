@@ -68,7 +68,7 @@
 
        
 
-            <h1>Selamat Datang Kembali {{Auth::user()->name}}</h1>
+            
             <br><br>
             @if(session('success'))
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -78,82 +78,34 @@
               </button>
             </div>
             @endif
-            <div class="card-header"><h3>Data Penduduk</h3></div>
-            <table border="3">
-                <tr>
-                <th>No</th>
-                <th>Category Name</th>
-                <th>User ID</th>
-                <th>Created At</th>
-                <th>Edit</th>
-                </tr>
-                @php($i = 1)
-                @foreach($categories as $category)
-                <tr> 
-                <td>{{$categories->firstItem()+$loop->index}}</td>
-                  <td>{{$category->category_name}}</td>
-                  <td>{{$category->user_id}}</td>
-                  <td>
-                  @if($category->created_at==NULL)
-                    <span class="text-danger">Tidak Ada Tanggal</span>
-                  @else
-                  {{Carbon\Carbon::parse($category->created_at)->diffForHumans()}}
-                  @endif
-                </td>
-                <td>
-                  <a href="{{url('category/edit/'.$category->id )}}" class="btn btn-info">Edit</a>
-                  <a href="{{url('softdelete/category/'.$category->id )}}" class="btn btn-danger">Delete</a>
-                </td>
-                </tr>
-                @endforeach
-            </table>
-        
-            {{$categories->links()  }}  
-       
-              
-              <div class="card">
-                
-                <div class="card-header">Add Category
-                </div>
-                <div class="card-body">
-                  <form action="{{route('store.category')}}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                      <label for="example">Category Name</label>
-                      <input type="text" name="category_name" class="form-control">
-                    </div>
-                    @error('category_name')   
-                    <span class="text-danger">{{$message}}</span>
-                    @enderror
-                    <button type="submit" class="btn btn-primary">Add Category</button>
-                  </form>
-                  
-                </div>
-                <div class="card-header">Trashlist Category</div>
+
+             
+                <div class="card-header"><h3>Data Sampah Penduduk</h3></div>
                 <table border="3">
                   <tr>
-                  <th>No</th>
-                  <th>Category Name</th>
-                  <th>User ID</th>
-                  <th>Created At</th>
-                  <th>Edit</th>
+                  
+                  <th width="130px">id kependudukan</th>
+                  <th>nama</th>
+                  <th>status</th>
+                  <th>alamat</th>
+                  <th>date_of_birth</th>
+                  <th>Agama</th>
+                  <th>Action</th>
+  
                   </tr>
                   @php($i = 1)
                   @foreach($trashCat as $category)
                   <tr> 
-                  <td>{{$trashCat->firstItem()+$loop->index}}</td>
-                    <td>{{$category->category_name}}</td>
-                    <td>{{$category->user_id}}</td>
-                    <td>
-                    @if($category->created_at==NULL)
-                      <span class="text-danger">Tidak Ada Tanggal</span>
-                    @else
-                    {{Carbon\Carbon::parse($category->created_at)->diffForHumans()}}
-                    @endif
-                  </td>
+               
+                    <td>{{$category->id_kependudukan}}</td>
+                    <td>{{$category->nama}}</td>
+                    <td>{{$category->status}}</td>
+                    <td>{{$category->alamat}}</td>
+                    <td>{{$category->date_of_birth}}</td>
+                    <td>{{$category->agama}}</td>
                   <td>
-                    <a href="{{url('category/restore/'.$category->id )}}" class="btn btn-info">Restore</a>
-                    <a href="{{url('category/delete/'.$category->id )}}" class="btn btn-danger">Delete Perm</a>
+                    <a href="{{url('/Penduduk/restore/'.$category->id_kependudukan )}}" class="btn btn-info">restore</a>
+                    <a href="{{url('/Penduduk/delete/'.$category->id_kependudukan)}}" class="btn btn-danger">Delete</a>
                   </td>
                   </tr>
                   @endforeach

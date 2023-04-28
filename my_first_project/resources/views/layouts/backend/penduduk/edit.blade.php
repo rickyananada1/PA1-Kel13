@@ -64,110 +64,53 @@
 
 
         <div class="content-wrapper">
-
-
-       
-
-            <h1>Selamat Datang Kembali {{Auth::user()->name}}</h1>
-            <br><br>
-            @if(session('success'))
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-              <strong>{{session('success')}}</strong>
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            @endif
-            <div class="card-header"><h3>Data Penduduk</h3></div>
-            <table border="3">
-                <tr>
-                <th>No</th>
-                <th>Category Name</th>
-                <th>User ID</th>
-                <th>Created At</th>
-                <th>Edit</th>
-                </tr>
-                @php($i = 1)
-                @foreach($categories as $category)
-                <tr> 
-                <td>{{$categories->firstItem()+$loop->index}}</td>
-                  <td>{{$category->category_name}}</td>
-                  <td>{{$category->user_id}}</td>
-                  <td>
-                  @if($category->created_at==NULL)
-                    <span class="text-danger">Tidak Ada Tanggal</span>
-                  @else
-                  {{Carbon\Carbon::parse($category->created_at)->diffForHumans()}}
-                  @endif
-                </td>
-                <td>
-                  <a href="{{url('category/edit/'.$category->id )}}" class="btn btn-info">Edit</a>
-                  <a href="{{url('softdelete/category/'.$category->id )}}" class="btn btn-danger">Delete</a>
-                </td>
-                </tr>
-                @endforeach
-            </table>
-        
-            {{$categories->links()  }}  
-       
-              
-              <div class="card">
-                
-                <div class="card-header">Add Category
-                </div>
-                <div class="card-body">
-                  <form action="{{route('store.category')}}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                      <label for="example">Category Name</label>
-                      <input type="text" name="category_name" class="form-control">
-                    </div>
-                    @error('category_name')   
-                    <span class="text-danger">{{$message}}</span>
-                    @enderror
-                    <button type="submit" class="btn btn-primary">Add Category</button>
-                  </form>
-                  
-                </div>
-                <div class="card-header">Trashlist Category</div>
-                <table border="3">
-                  <tr>
-                  <th>No</th>
-                  <th>Category Name</th>
-                  <th>User ID</th>
-                  <th>Created At</th>
-                  <th>Edit</th>
-                  </tr>
-                  @php($i = 1)
-                  @foreach($trashCat as $category)
-                  <tr> 
-                  <td>{{$trashCat->firstItem()+$loop->index}}</td>
-                    <td>{{$category->category_name}}</td>
-                    <td>{{$category->user_id}}</td>
-                    <td>
-                    @if($category->created_at==NULL)
-                      <span class="text-danger">Tidak Ada Tanggal</span>
-                    @else
-                    {{Carbon\Carbon::parse($category->created_at)->diffForHumans()}}
-                    @endif
-                  </td>
-                  <td>
-                    <a href="{{url('category/restore/'.$category->id )}}" class="btn btn-info">Restore</a>
-                    <a href="{{url('category/delete/'.$category->id )}}" class="btn btn-danger">Delete Perm</a>
-                  </td>
-                  </tr>
-                  @endforeach
-              </table>
-          
-              {{$trashCat->links()  }}  
-             
-                
-                </div>
-               
-           
-
-
-     
+            <form action="{{url('Penduduk/update/'.$categories->id_kependudukan)}}" method="POST">
+              @csrf
+              <div class="form-group">
+                <label for="exampleInputEmail1">Nama</label>
+                <input type="text" name="nama" class="form-control"  placeholder="Masukkan Nama" value="{{$categories->nama}}">
+                @error('nama')  
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Alamat</label>
+                <input type="text" name="alamat" class="form-control" placeholder="Masukkan Alamat" value="{{$categories->alamat}}">
+                @error('alamat')  
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Tanggal Lahir</label>
+                <input type="date" name="date_of_birth" class="form-control" placeholder="Masukkan Tanggal Lahir" value="{{$categories->date_of_birth}}">
+                @error('date_of_birth')  
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Status Kawin</label>
+                <select name="status"  value="{{$categories->status}}">Status Kawin
+                  <option>Kawin</option>
+                  <option>Belum Kawin</option>
+                </select><br><br>
+                @error('status')  
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Agama</label>
+                  <select name="agama" value="{{$categories->agama}}">Status Kawin
+                    <option>Kristen Katolik</option>
+                    <option>Islam</option>
+                    <option>Budha</option>
+                    <option>Kong Hucu</option>
+                    <option>Kristen Protestan</option>
+                  </select>
+              </div>   @error('agama')
+              <span class="text-danger">{{$message}}</span>
+              @enderror  <br><br>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
 
               @include('layouts.backend.footer')
 
@@ -201,3 +144,4 @@
 
   </body>
 </html>
+
