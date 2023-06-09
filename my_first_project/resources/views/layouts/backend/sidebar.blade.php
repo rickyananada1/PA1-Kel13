@@ -1,412 +1,179 @@
-<aside class="left-sidebar bg-sidebar">
-    <div id="sidebar" class="sidebar sidebar-with-footer">
-      <!-- Aplication Brand -->
-      <div class="app-brand">
-        <a href="/index.html">
-          <svg
-            class="brand-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="xMidYMid"
-            width="30"
-            height="33"
-            viewBox="0 0 30 33"
-          >
-            <g fill="none" fill-rule="evenodd">
-              <path
-                class="logo-fill-blue"
-                fill="#7DBCFF"
-                d="M0 4v25l8 4V0zM22 4v25l8 4V0z"
-              />
-              <path class="logo-fill-white" fill="#FFF" d="M11 4v25l8 4V0z" />
-            </g>
-          </svg>
-          <span class="brand-name">Admin Balige ll</span>
-        </a>
+ <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+  <!-- Sidebar - Brand -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard">
+      <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
       </div>
-      <!-- begin sidebar scrollbar -->
-      <div class="sidebar-scrollbar">
+      <div class="sidebar-brand-text mx-3">Admin Balige  <sup>II</sup></div>
+  </a>
 
-        <!-- sidebar menu -->
-        <ul class="nav sidebar-inner" id="sidebar-menu">
-          
+  <!-- Divider -->
+  <hr class="sidebar-divider my-0">
 
-          
-            <li  class="has-sub active expand" >
-              <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#dashboard"
-                aria-expanded="false" aria-controls="dashboard">
-                <i class="mdi mdi-view-dashboard-outline"></i>
-                <span class="nav-text">Penduduk</span> <b class="caret"></b>
-              </a>
-              <ul  class="collapse show"  id="dashboard"
-                data-parent="#sidebar-menu">
-                <div class="sub-menu">
-                  
-                  
-                    
-                      <li  class="active" >
-                        <a class="sidenav-item-link" href="{{route('user.penduduk')}}">
-                          <span class="nav-text">Data Penduduk</span>
-                          
-                        </a>
-                      </li>
-                    
-                  
+  <!-- Nav Item - Dashboard -->
+  <li class="nav-item active">
+      <a class="nav-link" href="{{url('/dashboard')}}">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Dashboard</span></a>
+  </li>
 
-                  
-                  
-                    
-                      <li >
-                        <a class="sidenav-item-link" href="{{route('hapus.penduduk')}}">
-                          <span class="nav-text">Data Sampah Penduduk</span>
-                          
-                    
-                          
-                        </a>
-                      </li>
-                    
-                  
+  <!-- Divider -->
+  <hr class="sidebar-divider">
 
-                  
-                </div>
-              </ul>
-            </li>
-          
+  <!-- Heading -->
+  <div class="sidebar-heading">
+      Penduduk
+  </div>
 
-          
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link" href="{{route('kode.keluarga')}}">
+        <i class="fas fa-fw fa-user"></i>
+        <span><strong>Kode Keluarga</strong></span></a>
+  </li>
+  
+  <li class="nav-item">
+    <a class="nav-link" href="{{route('user.penduduk')}}">
+        <i class="fas fa-fw fa-user"></i>
+        <span><strong>Data Penduduk</strong></span></a>
+</li>
 
-          
-            <li class="has-sub active expand">
-              <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#dashboard1"
-                aria-expanded="false" aria-controls="dashboard1">
-                <i class="mdi mdi-view-dashboard-outline"></i>
-                <span class="nav-text">Galeri Desa</span> <b class="caret"></b>
-              </a>
-              <ul class="collapse show" id="dashboard1" data-parent="#sidebar-menu">
-                <div class="sub-menu">
-                  <li class="active">
-                    <a class="sidenav-item-link" href="{{route('users.galeri')}}">
-                      <span class="nav-text">Galeri</span>
-                    </a>
-                  </li>
-                </div>
-              </ul>
-            </li>
-            
-          
+<hr class="sidebar-divider">
 
-          
 
-          
-            <li class="has-sub active expand">
-              <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#dashboard2"
-                aria-expanded="false" aria-controls="dashboard2">
-                <i class="mdi mdi-view-dashboard-outline"></i>
-                <span class="nav-text">Berita Desa</span> <b class="caret"></b>
-              </a>
-              <ul class="collapse show" id="dashboard2" data-parent="#sidebar-menu">
-                <div class="sub-menu">
-                  <li class="active">
-                    <a class="sidenav-item-link" href="{{route('users.berita')}}">
-                      <span class="nav-text">Berita</span>
-                    </a>
-                  </li>
-                </div>
-              </ul>
-            </li>
-          
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Pengemuman Desa
+</div>
 
-            <li class="has-sub active expand">
-              <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#dashboard3"
-                aria-expanded="false" aria-controls="dashboard3">
-                <i class="mdi mdi-view-dashboard-outline"></i>
-                <span class="nav-text">Produk Desa</span> <b class="caret"></b>
-              </a>
-              <ul class="collapse show" id="dashboard3" data-parent="#sidebar-menu">
-                <div class="sub-menu">
-                  <li class="active">
-                    <a class="sidenav-item-link" href="{{route('users.produk')}}">
-                      <span class="nav-text">Produk</span>
-                    </a>
-                  </li>
-                </div>
-              </ul>
-            </li>
-            
-            <li class="has-sub active expand">
-              <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#dashboard4"
-                aria-expanded="false" aria-controls="dashboard4">
-                <i class="mdi mdi-view-dashboard-outline"></i>
-                <span class="nav-text">Struktur Desa</span> <b class="caret"></b>
-              </a>
-              <ul class="collapse show" id="dashboard4" data-parent="#sidebar-menu">
-                <div class="sub-menu">
-                  <li class="active">
-                    <a class="sidenav-item-link" href="{{route('users.struktur')}}">
-                      <span class="nav-text">Struktur</span>
-                    </a>
-                  </li>
-                </div>
-              </ul>
-            </li>
+  <!-- Nav Item - Charts -->
+  <li class="nav-item">
+      <a class="nav-link" href="{{route('index.pengumuman')}}">
+        <i class="fas fa-fw fa-newspaper"></i>
+          <span><strong>Pengumuman</strong></span></a>
+  </li>
+  <!-- Divider -->
+  <hr class="sidebar-divider">
 
-          
-            <li  class="has-sub" >
-              <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#pages"
-                aria-expanded="false" aria-controls="pages">
-                <i class="mdi mdi-image-filter-none"></i>
-                <span class="nav-text">Pages</span> <b class="caret"></b>
-              </a>
-              <ul  class="collapse"  id="pages"
-                data-parent="#sidebar-menu">
-                <div class="sub-menu">
-                  
-                  
-                    
-                      <li >
-                        <a class="sidenav-item-link" href="user-profile.html">
-                          <span class="nav-text">User Profile</span>
-                          
-                        </a>
-                      </li>
-                    
-                  
+  <!-- Heading -->
+  <div class="sidebar-heading">
+      Galeri Desa
+  </div>
 
-                  
-                  
-                  <li  class="has-sub" >
-                    <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#authentication"
-                      aria-expanded="false" aria-controls="authentication">
-                      <span class="nav-text">Authentication</span> <b class="caret"></b>
-                    </a>
-                    <ul  class="collapse"  id="authentication">
-                      <div class="sub-menu">
-                        
-                        <li >
-                          <a href="sign-in.html">Sign In</a>
-                        </li>
-                        
-                        <li >
-                          <a href="sign-up.html">Sign Up</a>
-                        </li>
-                        
-                      </div>
-                    </ul>
-                  </li>
-                  
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link" href="{{route('users.galeri')}}">
+      <i class="fas fa-fw fa-images"></i>
+        <span><strong>Galeri</strong></span></a>
+</li>
 
-                  
-                  
-                  <li  class="has-sub" >
-                    <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#others"
-                      aria-expanded="false" aria-controls="others">
-                      <span class="nav-text">Others</span> <b class="caret"></b>
-                    </a>
-                    <ul  class="collapse"  id="others">
-                      <div class="sub-menu">
-                        
-                        <li >
-                          <a href="invoice.html">invoice</a>
-                        </li>
-                        
-                        <li >
-                          <a href="error.html">Error</a>
-                        </li>
-                        
-                      </div>
-                    </ul>
-                  </li>
-                  
+  <!-- Divider -->
+  <hr class="sidebar-divider">
 
-                  
-                </div>
-              </ul>
-            </li>
-          
 
-          
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Berita Desa
+</div>
 
-          
-            <li  class="has-sub" >
-              <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#documentation"
-                aria-expanded="false" aria-controls="documentation">
-                <i class="mdi mdi-book-open-page-variant"></i>
-                <span class="nav-text">Documentation</span> <b class="caret"></b>
-              </a>
-              <ul  class="collapse"  id="documentation"
-                data-parent="#sidebar-menu">
-                <div class="sub-menu">
-                  
-                  
-                    
-                      <li class="section-title">
-                        Getting Started
-                      </li>
-                    
-                  
+  <!-- Nav Item - Charts -->
+  <li class="nav-item">
+      <a class="nav-link" href="{{route('users.berita')}}">
+        <i class="fas fa-fw fa-newspaper"></i>
+          <span><strong>Berita</strong></span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{route('users.categoryberita')}}">
+      <i class="fas fa-fw fa-shopping-bag"></i>
+      <span><strong>Category</strong></span></a>
+  </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider">
 
-                  
-                  
-                    
-                      <li >
-                        <a class="sidenav-item-link" href="introduction.html">
-                          <span class="nav-text">Introduction</span>
-                          
-                        </a>
-                      </li>
-                    
-                  
 
-                  
-                  
-                    
-                      <li >
-                        <a class="sidenav-item-link" href="setup.html">
-                          <span class="nav-text">Setup</span>
-                          
-                        </a>
-                      </li>
-                    
-                  
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Produk Desa
+</div>
 
-                  
-                  
-                    
-                      <li >
-                        <a class="sidenav-item-link" href="customization.html">
-                          <span class="nav-text">Customization</span>
-                          
-                        </a>
-                      </li>
-                    
-                  
+  <!-- Nav Item - Tables -->
+  <li class="nav-item">
+    <a class="nav-link" href="{{route('users.produk')}}">
+      <i class="fas fa-fw fa-shopping-bag"></i>
+      <span><strong>Produk</strong></span></a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{{route('users.category')}}">
+    <i class="fas fa-fw fa-shopping-bag"></i>
+    <span><strong>Category</strong></span></a>
+</li>
 
-                  
-                  
-                    
-                      <li class="section-title">
-                        Layouts
-                      </li>
-                    
-                  
+  <!-- Divider -->
+  <hr class="sidebar-divider">
 
-                  
-                  
-                  <li  class="has-sub" >
-                    <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#headers"
-                      aria-expanded="false" aria-controls="headers">
-                      <span class="nav-text">Layout Headers</span> <b class="caret"></b>
-                    </a>
-                    <ul  class="collapse"  id="headers">
-                      <div class="sub-menu">
-                        
-                        <li >
-                          <a href="header-fixed.html">Header Fixed</a>
-                        </li>
-                        
-                        <li >
-                          <a href="header-static.html">Header Static</a>
-                        </li>
-                        
-                        <li >
-                          <a href="header-light.html">Header Light</a>
-                        </li>
-                        
-                        <li >
-                          <a href="header-dark.html">Header Dark</a>
-                        </li>
-                        
-                      </div>
-                    </ul>
-                  </li>
-                  
 
-                  
-                  
-                  <li  class="has-sub" >
-                    <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#sidebar-navs"
-                      aria-expanded="false" aria-controls="sidebar-navs">
-                      <span class="nav-text">layout Sidebars</span> <b class="caret"></b>
-                    </a>
-                    <ul  class="collapse"  id="sidebar-navs">
-                      <div class="sub-menu">
-                        
-                        <li >
-                          <a href="sidebar-open.html">Sidebar Open</a>
-                        </li>
-                        
-                        <li >
-                          <a href="sidebar-minimized.html">Sidebar Minimized</a>
-                        </li>
-                        
-                        <li >
-                          <a href="sidebar-offcanvas.html">Sidebar Offcanvas</a>
-                        </li>
-                        
-                        <li >
-                          <a href="sidebar-with-footer.html">Sidebar With Footer</a>
-                        </li>
-                        
-                        <li >
-                          <a href="sidebar-without-footer.html">Sidebar Without Footer</a>
-                        </li>
-                        
-                        <li >
-                          <a href="right-sidebar.html">Right Sidebar</a>
-                        </li>
-                        
-                      </div>
-                    </ul>
-                  </li>
-                  
+<!-- Heading -->
+<div class="sidebar-heading">
+  Struktur Desa
+</div>
 
-                  
-                  
-                    
-                      <li >
-                        <a class="sidenav-item-link" href="rtl.html">
-                          <span class="nav-text">RTL Direction</span>
-                          
-                        </a>
-                      </li>
-                    
-                  
+<!-- Nav Item - Tables -->
+<li class="nav-item">
+  <a class="nav-link" href="{{route('users.struktur')}}">
+    <i class="fas fa-fw fa-shopping-bag"></i>
+    <span><strong>Struktur</strong></span></a>
+</li>
 
-                  
-                </div>
-              </ul>
-            </li>
-          
+  <!-- Divider -->
+  <hr class="sidebar-divider">
 
-          
-        </ul>
 
-      </div>
+<!-- Heading -->
+<div class="sidebar-heading">
+  Desa
+</div>
 
-      <hr class="separator" />
+<!-- Nav Item - Tables -->
+<li class="nav-item">
+  <a class="nav-link" href="{{route('index.meta')}}">
+    <i class="fas fa-fw fa-newspaper"></i>
+      <span><strong>Halaman Desa</strong></span></a>
+</li>
 
-      <div class="sidebar-footer">
-        <div class="sidebar-footer-content">
-          <h6 class="text-uppercase">
-            Cpu Uses <span class="float-right">40%</span>
-          </h6>
-          <div class="progress progress-xs">
-            <div
-              class="progress-bar active"
-              style="width: 40%;"
-              role="progressbar"
-            ></div>
-          </div>
-          <h6 class="text-uppercase">
-            Memory Uses <span class="float-right">65%</span>
-          </h6>
-          <div class="progress progress-xs">
-            <div
-              class="progress-bar progress-bar-warning"
-              style="width: 65%;"
-              role="progressbar"
-            ></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </aside>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block ">
+
+  <!-- Sidebar Toggler (Sidebar) -->
+  <div class="text-center d-none d-md-inline">
+      <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  </div>
+
+  
+</ul>
+<!-- End of Sidebar -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

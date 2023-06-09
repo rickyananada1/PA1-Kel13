@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\models\Produk;
+use App\models\Category;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ProdukController extends Controller
 {
@@ -13,20 +16,24 @@ class ProdukController extends Controller
         return View('layouts.backend.produk.produk',compact('produk'));
     }
     public function AddProduk(){
-        return View('layouts.backend.produk.add_produk');
+        $category=Category::all();
+        return View('layouts.backend.produk.add_produk',compact('category'));
     }
     public function AddIsiProduk(Request $request)
     {
         $validate = $request->validate([
-            'judul_produk' => 'required|unique:produks|max:50',
+            'judul_produk' => 'required|unique:produk',
             'brand_image' => 'required|mimes:jpg,jpeg,png',
-            'isi_produk' => 'required|max:300',
+            'isi_produk' => 'required',
+            'category_id'    => 'required',
         ],
         [
-            'judul_produk.required' => 'Judul Tidak Boleh Kosong',
-            'judul_produk.max' => 'Judul maximal 50 huruf',
+            'judul_produk.required' => 'Judul Produk Tidak Boleh Kosong',
+            'judul_produk.max' => 'Judul Produk maximal 50 huruf',
             'isi_produk.required' => 'Isi Produk Tidak Boleh Kosong',
-            'isi_produk.max' => 'Isi Produk maximal 300 huruf',
+            'brand_image.required' => 'Gambar Produk Tidak Boleh Kosong',
+            'brand_image.mimes' => 'Gambar Produk harus berupa file JPG, JPEG, atau PNG',
+            'category_id.required' => ' Category Produk Tidak Boleh Kosong',
         ]);
         $brand_image = $request->file('brand_image');
 
@@ -41,8 +48,11 @@ class ProdukController extends Controller
     
         Produk::insert([
             'judul_produk' => $request->judul_produk,
+            'slug' => STr::slug($request->judul_produk),
             'brand_image' => $last_img,
             'isi_produk' => $request->isi_produk,
+            'category_id' =>$request->category_id,
+            'id_user'   =>  Auth::id(),
             'created_at' => Carbon::now(),
         ]);
     
@@ -50,35 +60,42 @@ class ProdukController extends Controller
     }
     public function EditProduk($id){
         $produk =Produk::where('id', $id)->first();
-        return view('layouts.backend.produk.edit_produk',compact('produk'));
+        $category=Category::all();
+        return view('layouts.backend.produk.edit_produk',compact('produk','category'));
     }
     public function UpdateProduk(Request $request,$id){
         $validate = $request->validate([
-            'judul_produk' => 'required|max:50',
-            'isi_produk' => 'required|max:300',
+            'judul_produk' => 'required',
+            'isi_produk' => 'required',
+            'category_id'    => 'required',
         ],
         [
             'judul_produk.required' => 'Judul Tidak Boleh Kosong',
             'judul_produk.max' => 'Judul maximal 50 huruf',
             'isi_produk.required' => 'Isi produk Tidak Boleh Kosong',
-            'isi_produk.max' => 'Isi produk maximal 300 huruf',
+    
         ]);
         $old_image=$request->old_image;
         $brand_image = $request->file('brand_image');
 
-        if($brand_image){
+        if ($request->hasFile('brand_image')) {
+            if (file_exists(public_path($old_image))) {
+                unlink(public_path($old_image));
+            }
+    
+            $brand_image = $request->file('brand_image');
             $nama_gen = hexdec(uniqid());
             $img_ext = strtolower($brand_image->getClientOriginalExtension());
             $img_name = $nama_gen . '.' . $img_ext;
             $up_location = "image/brand/";
             $last_img = $up_location . $img_name;
             $brand_image->move($up_location, $img_name);
-        
-            unlink($old_image);
             Produk::find($id)->update([
                 'judul_produk' => $request->judul_produk,
+                'slug' => STr::slug($request->judul_produk),
                 'isi_produk' => $request->isi_produk,
                 'brand_image' => $last_img,
+                'category_id' =>$request->category_id,
                 'updated_at' => Carbon::now(),
             ]);
         
@@ -87,6 +104,8 @@ class ProdukController extends Controller
             Produk::find($id)->update([
                 'judul_produk' => $request->judul_produk,
                 'isi_produk' => $request->isi_produk,
+                'category_id' =>$request->category_id,
+                'slug' => STr::slug($request->judul_produk),
                 'updated_at' => Carbon::now(),
             ]);
         
@@ -95,12 +114,17 @@ class ProdukController extends Controller
 
       
     }
-    public function DelProduk($id){
-        $image = Produk::find($id);
-        $old_image = $image->brand_image;
-        unlink($old_image);
-
-        Produk::find($id)->delete();
-        return redirect()->back()->with('success',' data sudah berhasil dihapus');
-}
+    public function DelProduk($id)
+    {
+        $berita = Produk::find($id);
+        $old_image = $berita->brand_image;
+    
+        if (file_exists(public_path($old_image))) {
+            unlink(public_path($old_image));
+        }
+    
+        $berita->delete();
+    
+        return redirect()->back()->with('success', 'Berita sudah berhasil dihapus');
+    }
 }

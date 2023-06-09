@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Produk extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'id',
-        'judul_produk',
-        'brand_image',
-        'isi_produk',
-    ];
+    protected $table = 'produk';
+    protected $guarded = ['id'];
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+    public function jabatans(){
+        return $this->belongsTo(User::class,'id_user');
+    }
 }

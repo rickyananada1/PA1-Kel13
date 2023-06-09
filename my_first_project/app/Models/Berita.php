@@ -9,10 +9,13 @@ class Berita extends Model
 {
     use HasFactory;
     protected $table = 'berita';
-    protected $fillable = [
-        'id',
-        'judul_berita',
-        'brand_image',
-        'isi_berita',
-    ];
+    protected $guarded = ['id'];
+    
+    public function categoryberita(){
+        return $this->belongsTo(Categoryberita::class,'category_id');
+    }
+    public function admin()
+{
+    return $this->belongsTo(User::class,'id_user');
+}
 }

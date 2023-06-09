@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 class Galeri extends Model
 {
     use HasFactory;
+    protected $table = 'galeri';
     protected $fillable = [
         'id_galeri',
         'judul_galeri',
         'brand_image',
-        'deskripsi',
     ];
 }

@@ -1,33 +1,43 @@
+<style>
+    .fixed-whatsapp:hover::before {
+      content: "Hubungi Kami";
+      display: block;
+      position: absolute;
+      background-color: green;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+  </style>
+  
  <!-- Footer Start -->
+ 
  <div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container py-5">
         <div class="row g-5">
             <div class="col-lg-3 col-md-6">
-                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Balige II,Kec Balige,Toba,Sumut</p>
+                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Balige II,Balige,Toba,Sumut</p>
             <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+62 4883948 323</p>
             <p class="mb-2"><i class="fa fa-envelope me-3"></i>desabaligeII@gmail.com</p>
-            <div class="d-flex pt-3">
-                <a class="btn btn-square btn-light rounded-circle me-2" href=""><i
-                        class="fab fa-twitter"></i></a>
-                <a class="btn btn-square btn-light rounded-circle me-2" href=""><i
-                        class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-square btn-light rounded-circle me-2" href=""><i
-                        class="fab fa-youtube"></i></a>
-                <a class="btn btn-square btn-light rounded-circle me-2" href=""><i
-                        class="fab fa-linkedin-in"></i></a>
-            </div>
+            
         </div>
             <div class="col-lg-3 col-md-6">
                 <h4 class="text-light mb-4">Desa Balige II</h4>
-            <a class="btn btn-link" href="">Data Penduduk</a>
-            <a class="btn btn-link" href="">Sejarah</a>
-            <a class="btn btn-link" href="">Struktur Desa</a>
-            <a class="btn btn-link" href="">Galeri</a>
+            <a class="btn btn-link" href="{{ route('user.datadesa') }}">Data Penduduk</a>
+            @foreach ($meta as $item)      
+            <a class="btn btn-link" href="{{ route('halaman.desa', $item->meta_name) }}">{{ $item->judul }}</a>
+        @endforeach
+            <a class="btn btn-link" href="{{route('category_galeri')}}">Galeri</a>
             </div>
             <div class="col-lg-3 col-md-6">
                 <h4 class="text-light mb-4">Produk Desa</h4>
-                <a class="btn btn-link" href="">Makanan Khas</a>
-                <a class="btn btn-link" href="">Saovenir</a>
+                @foreach ($categoryproduk as $item)
+                <a class="btn btn-link" href="{{url('/Produk/Category/'.$item->category_name )}}">{{$item->category_name}}</a>
+                @endforeach
             </div>
             <div class="col-lg-3 col-md-6">
                 <h4 class="text-light mb-4">Informasi</h4>
@@ -58,8 +68,8 @@
 
 
 <!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
-
+{{-- <a class='fixed-whatsapp' href='https://wa.me/6282166284048?text=Hai%20Saya%20Kepala%20Desa%20Balige%20II' rel='nofollow noopener' target='_blank' title='Whatsapp'>
+ --}}
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -77,6 +87,22 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <!-- Template Javascript -->
 <script src="{{asset('FRONTEND')}}/js/main.js"></script>
+
+
+
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var whatsappLink = document.createElement('a');
+      whatsappLink.className = 'fixed-whatsapp';
+      whatsappLink.href = 'https://wa.me/6282166284048?text=Hai%20Saya%20Kepala%20Desa%20Balige%20II';
+      whatsappLink.setAttribute('rel', 'nofollow noopener');
+      whatsappLink.setAttribute('target', '_blank');
+      whatsappLink.setAttribute('title', 'WhatsApp');
+      document.body.appendChild(whatsappLink);
+    });
+  </script> --}}
+
+
 </body>
 
 </html>

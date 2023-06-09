@@ -55,42 +55,6 @@
 
 /* Pie Chart */
 
-    $(document).ready(function(){
-
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-        
-        function drawChart() {
-        
-        var data = google.visualization.arrayToDataTable([
-        ['Task', 'Hours per Day'],
-        ['Belum Tamat/ Belum Sekolah', 18],
-        ['Tamat Kuliah', 31],
-        ['Tamat Stara', 10],
-        ['Tamat SD', 10],
-        ['Tamat SMA', 17],
-        ['Tamat SMP ', 22],
-        ['Tamat S1' , 9],
-        ['Tamat S2', 3],
-        ['Tamat D3', 20],
-        
-        
-        ]);
-        
-        var options = {
-        title: 'Data Pendidikan',
-        pieSliceText: 'value',
-        is3D:true
-        };
-        
-        
-        var chart = new google.visualization.PieChart(document.getElementById('piechart3d'));
-        
-        chart.draw(data, options);
-        }
-        
-        
-        });
 
 
 /* Galeri di Home */
@@ -123,3 +87,37 @@ $(document).ready(function(){
 
 
 
+
+
+
+$(function() {
+
+	if ( $('.owl-2').length > 0 ) {
+        $('.owl-2').owlCarousel({
+            center: false,
+            items: 1,
+            loop: true,
+            stagePadding: 0,
+            margin: 20,
+            smartSpeed: 1000,
+            autoplay: true,
+            nav: true,
+            dots: true,
+            pauseOnHover: false,
+            responsive:{
+                600:{
+                    margin: 20,
+                    nav: true,
+                  items: 2
+                },
+                1000:{
+                    margin: 20,
+                    stagePadding: 0,
+                    nav: true,
+                  items: 3
+                }
+            }
+        });            
+    }
+
+})

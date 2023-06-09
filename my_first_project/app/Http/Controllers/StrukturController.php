@@ -19,15 +19,16 @@ class StrukturController extends Controller
     public function AddIsiStruktur(Request $request)
     {
         $validate = $request->validate([
-            'nama' => 'required|unique:strukturs|max:50',
+            'nama' => 'required|unique:struktur',
             'brand_image' => 'required|mimes:jpg,jpeg,png',
             'jabatan' => 'required|max:300',
         ],
         [
-            'nama.required' => 'Judul Tidak Boleh Kosong',
-            'nama.max' => 'Judul maximal 50 huruf',
-            'jabatan.required' => 'Isi Produk Tidak Boleh Kosong',
-            'jabatan.max' => 'Isi Produk maximal 300 huruf',
+            'nama.required' => 'Nama Anggota Tidak Boleh Kosong',
+            'nama.max' => 'Nama Anggota maximal 50 huruf',
+            'brand_image.required' => 'Foto Anggota tidak boleh kosong',
+            'jabatan.required' => 'Jabatan Tidak Boleh Kosong',
+            'jabatan.max' => 'Jabatan maximal 300 huruf',
         ]);
         $brand_image = $request->file('brand_image');
 
@@ -53,56 +54,62 @@ class StrukturController extends Controller
         $struktur =Struktur::where('id', $id)->first();
         return view('layouts.backend.struktur.edit_struktur',compact('struktur'));
     }
-    public function UpdateStruktur(Request $request,$id){
+    public function UpdateStruktur(Request $request, $id)
+    {
         $validate = $request->validate([
-            'nama' => 'required|max:50',
+            'nama' => 'required',
             'jabatan' => 'required|max:300',
-        
         ],
         [
-            'nama.required' => 'Judul Tidak Boleh Kosong',
-            'nama.max' => 'Judul maximal 50 huruf',
-            'jabatan.required' => 'jabatan Tidak Boleh Kosong',
-            'jabatan.max' => 'jabatan maximal 300 huruf',
+            'nama.required' => 'Nama Tidak Boleh Kosong',
+            'nama.max' => 'Nama maximal 50 huruf',
+            'jabatan.required' => 'Jabatan Tidak Boleh Kosong',
+            'jabatan.max' => 'Jabatan maximal 300 huruf',
         ]);
-        $old_image=$request->old_image;
-        $brand_image = $request->file('brand_image');
-
-        if($brand_image){
+    
+        $struktur = Struktur::find($id);
+        $old_image = $struktur->brand_image;
+    
+        if ($request->hasFile('brand_image')) {
+            if (file_exists(public_path($old_image))) {
+                unlink(public_path($old_image));
+            }
+    
+            $brand_image = $request->file('brand_image');
             $nama_gen = hexdec(uniqid());
             $img_ext = strtolower($brand_image->getClientOriginalExtension());
             $img_name = $nama_gen . '.' . $img_ext;
             $up_location = "image/brand/";
             $last_img = $up_location . $img_name;
             $brand_image->move($up_location, $img_name);
-        
-            unlink($old_image);
-            Struktur::find($id)->update([
+    
+            $struktur->update([
                 'nama' => $request->nama,
                 'jabatan' => $request->jabatan,
                 'brand_image' => $last_img,
                 'updated_at' => Carbon::now(),
             ]);
-        
-            return redirect()->route('users.struktur')->with('success', 'Gambar Sudah Di Update');
-        }else{
-            Struktur::find($id)->update([
+        } else {
+            $struktur->update([
                 'nama' => $request->nama,
                 'jabatan' => $request->jabatan,
                 'updated_at' => Carbon::now(),
             ]);
-        
-            return redirect()->route('users.struktur')->with('success', 'Gambar Sudah Di Update');
         }
-
-      
+    
+        return redirect()->route('users.struktur')->with('success', 'Data Sudah Di Update');
     }
-    public function DelStruktur($id){
-        $image = Struktur::find($id);
-        $old_image = $image->brand_image;
-        unlink($old_image);
-
-        Struktur::find($id)->delete();
-        return redirect()->back()->with('success',' data sudah berhasil dihapus');
-}
+    public function DelStruktur($id)
+    {
+        $berita = Struktur::find($id);
+        $old_image = $berita->brand_image;
+        
+        if (file_exists(public_path($old_image))) {
+            unlink(public_path($old_image));
+        }
+    
+        $berita->delete();
+    
+        return redirect()->back()->with('success', 'Berita sudah berhasil dihapus');
+    }
 }
